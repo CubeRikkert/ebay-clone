@@ -13,7 +13,7 @@ export default class AdvertisementController {
 
     @Get('/advertisements')
     async allAdvertisements() {
-        const advertisements = await Advertisement.find()
+        const advertisements = await Advertisement.find({relations: ['seller']})
         return { advertisements }
     }
 

@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
-import { IsString, IsCurrency, Length, IsInt, IsUrl } from 'class-validator';
+import { IsString, IsCurrency, Length, IsUrl } from 'class-validator';
+import User from '../users/entity'
 
 @Entity()
 export default class Advertisement extends BaseEntity {
@@ -26,8 +27,7 @@ export default class Advertisement extends BaseEntity {
     @Column('int', {nullable:false})
     price: number
 
-    @IsInt()
-    @Column('int', {nullable:false})
-    sellerId: number
+    @ManyToOne(() => User, user => user.id)
+    seller: User
 
 }

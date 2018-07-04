@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { MinLength, IsString, IsEmail, IsNumberString } from 'class-validator';
-
+import Advertisement from '../advertisements/entity'
 
 @Entity()
 export default class User extends BaseEntity {
@@ -21,5 +21,8 @@ export default class User extends BaseEntity {
     @IsNumberString()
     @Column('text', {nullable:false})
     phoneNumber: string
+
+    @OneToMany(() => Advertisement, advertisement => advertisement.id)
+    advertisements: Advertisement[];
 
 }
