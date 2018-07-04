@@ -8,7 +8,7 @@ export default class AdvertisementController {
     getAdvertisement(
         @Param('id') id: number
     ) {
-        return Advertisement.findOne(id)
+        return Advertisement.findOne(id, {relations: ['seller']})
     }
 
     @Get('/advertisements')
